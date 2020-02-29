@@ -5,11 +5,12 @@ from security import authenticate, identity
 from resources.user import UserRegister
 from resources.item import Item, ItemList
 from resources.store import Store, StoreList
+import os
 
 from db import db
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db' # tell app that the db lives in the root folder
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///data.db') # tell app that the db lives in the root folder
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False # SQL alchemy tracks every change regardless of saving to db by default which takes resrouces. This turns that off
 app.secret_key = 'Bummiesjelly310'
 api = Api(app)
